@@ -30,8 +30,6 @@ function App(){
     },
   });
 
-  console.log(username)
-
   return(
     <div className="App">
       <div className="loginContainer">
@@ -78,7 +76,7 @@ function App(){
   useOneTap
 />;
           
-        </button>
+        </button> 
         <img
       onClick={linkedInLogin}
       src={linkedin}
