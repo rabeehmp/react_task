@@ -4,7 +4,6 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
-// You can use provided image shipped by this package or using your own
 import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 
 
@@ -13,13 +12,14 @@ function App(){
   const [username, setUsername]= useState('')
   const [password, addPassword]= useState('')
 
-  const HI = () =>{
+  const login_action = () =>{
     alert(username+" is usernme and "+password+ " is password")
   }
 
-  console.log(window.location.origin)
 
+  // Linkedin authenticaton function
   const { linkedInLogin } = useLinkedIn({
+    // client id generated from linkedin/developer
     clientId: '86lwq33kjcy4lk',
     redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
     onSuccess: (code) => {
@@ -33,48 +33,43 @@ function App(){
   return(
     <div className="App">
       <div className="loginContainer">
-        <h1>Welcome Back!</h1>
+        <h1 className="font_s">Login Screen</h1>
 
         <div className="input-container">
-          <label>Username </label>
+          <label className="font_s">Username </label>
           <input type="text" name="uname" required value={username} onChange={e=>setUsername(e.target.value)} />
     
 
         </div>
         <div className="input-container">
-          <label>Password </label>
+          <label className="font_s">Password </label>
           <input type="password" name="pass" required value={password} onChange={e=>addPassword(e.target.value)} />
         
         
         </div>
 
-        <a href="#">Forgot password?</a>
-        <a href="#">Create a new account</a>
+        <a href="#" className="font_s">Forgot password?</a>
+        <a href="#" className="font_s">Create a new account</a>
 
-        <button onClick={HI} className="loginBut">
+        <button onClick={login_action} className="loginBut">
           <p>Login</p>
         </button>
 
   
 
         <button className="siG">
-          {/* <img
-            src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-            alt="Trees"
-            height="30"
-          />
-          <p>Sign in with Google</p> */}
-          <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse,"hello");
-    const decoded = jwtDecode(credentialResponse.credential);
-    console.log("decoded with a guess", decoded);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-  useOneTap
-/>;
+          
+        <GoogleLogin
+        onSuccess={credentialResponse => {
+        console.log(credentialResponse,"Got the user data");
+        const decoded = jwtDecode(credentialResponse.credential);
+        console.log("decoded with a guess", decoded);
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+        useOneTap
+      />;
           
         </button> 
         <img

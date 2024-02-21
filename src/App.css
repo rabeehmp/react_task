@@ -8,6 +8,11 @@
   overflow: hidden;
   background: linear-gradient(rgb(255, 255, 255),rgb(248, 184, 184));
 }
+
+.font_s {
+  font-family:sans-serif
+}
+
 .loginContainer{
   display: flex;
   flex-direction: column;
